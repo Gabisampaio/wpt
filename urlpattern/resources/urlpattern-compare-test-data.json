@@ -1,0 +1,132 @@
+[
+  {
+    "left": { "pathname": "/foo/a" },
+    "right": { "pathname": "/foo/b" },
+    "expected": -1
+  },
+  {
+    "left": { "pathname": "/foo/b" },
+    "right": { "pathname": "/foo/bar" },
+    "expected": -1
+  },
+  {
+    "left": { "pathname": "/foo/bar" },
+    "right": { "pathname": "/foo/:bar" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "/foo/" },
+    "right": { "pathname": "/foo/:bar" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "/foo/:bar" },
+    "right": { "pathname": "/foo/*" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "/foo/{bar}" },
+    "right": { "pathname": "/foo/(bar)" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "/foo/{bar}" },
+    "right": { "pathname": "/foo/{bar}+" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "/foo/{bar}+" },
+    "right": { "pathname": "/foo/{bar}?" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "/foo/{bar}?" },
+    "right": { "pathname": "/foo/{bar}*" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "/foo/(123)" },
+    "right": { "pathname": "/foo/(12)" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "/foo/:b" },
+    "right": { "pathname": "/foo/:a" },
+    "expected": 0
+  },
+  {
+    "left": { "pathname": "*/foo" },
+    "right": { "pathname": "*" },
+    "expected": 1
+  },
+  {
+    "left": { "protocol": "https", "pathname": "*/foo" },
+    "right": { "protocol": "https" },
+    "expected": 1
+  },
+  {
+    "left": { "protocol": "https" },
+    "right": { "protocol": "https", "pathname": "*" },
+    "expected": 0
+  },
+  {
+    "left": { "hash": "b", "search": "a" },
+    "right": { "hash": "a", "search": "b" },
+    "expected": 1
+  },
+  {
+    "left": { "search": "b", "pathname": "a" },
+    "right": { "search": "a", "pathname": "b" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "b", "port": "1" },
+    "right": { "pathname": "a", "port": "2" },
+    "expected": 1
+  },
+  {
+    "left": { "port": "2", "hostname": "a" },
+    "right": { "port": "1", "hostname": "b" },
+    "expected": 1
+  },
+  {
+    "left": { "hostname": "b", "password": "a" },
+    "right": { "hostname": "a", "password": "b" },
+    "expected": 1
+  },
+  {
+    "left": { "password": "b", "username": "a" },
+    "right": { "password": "a", "username": "b" },
+    "expected": 1
+  },
+  {
+    "left": { "username": "b", "protocol": "a" },
+    "right": { "username": "a", "protocol": "b" },
+    "expected": 1
+  },
+  {
+    "left": { "port": "9" },
+    "right": { "port": "100" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "foo/:bar?/baz" },
+    "right": { "pathname": "foo/{:bar}?/baz" },
+    "expected": -1
+  },
+  {
+    "left": { "pathname": "foo/:bar?/baz" },
+    "right": { "pathname": "foo{/:bar}?/baz" },
+    "expected": 0
+  },
+  {
+    "left": { "pathname": "foo/:bar?/baz" },
+    "right": { "pathname": "fo{o/:bar}?/baz" },
+    "expected": 1
+  },
+  {
+    "left": { "pathname": "foo/:bar?/baz" },
+    "right": { "pathname": "foo{/:bar/}?baz" },
+    "expected": -1
+  }
+]
